@@ -1,0 +1,27 @@
+{
+  "name": "@existdb/gulp-replace-tmpl",
+  "version": "1.0.0",
+  "description": "Replace placeholders in files",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard",
+    "semantic-release": "semantic-release"
+  },
+  "author": "Juri Leino",
+  "license": "MIT",
+  "dependencies": {
+    "gulp-replace": "^1.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "semantic-release": "^17.3.0",
+    "standard": "^16.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eXist-db/gulp-replace-tmpl",
+    "license": "MIT"
+  }
+}
