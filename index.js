@@ -159,11 +159,12 @@ function mergeReplacements (replacements) {
  * @return {NodeJS.ReadWriteStream} transformation function
  */
 function GulpReplaceTmpl (replacements, options) {
+  const _options = options || {}
   // required option missing
   if (!replacements) {
     throw new Error('Replacements missing')
   }
-  if (options.prefix && options.prefix.match(/[^a-zA-Z0-9]/)) {
+  if (_options.prefix && _options.prefix.match(/[^a-zA-Z0-9]/)) {
     throw new Error('Invalid prefix, only [a-zA-Z0-9] allowed')
   }
 
@@ -171,23 +172,23 @@ function GulpReplaceTmpl (replacements, options) {
 
   let pattern, handler, prefix
 
-  if (!options.prefix && !options.unprefixed) {
+  if (!_options.prefix && !_options.unprefixed) {
     prefix = defaultPrefix
     pattern = defaultPattern
     handler = getMatchHandlerWithPrefix(defaultPrefix, mergedReplacements)
   }
-  if (options.prefix) {
-    prefix = options.prefix
-    pattern = new RegExp(`@(${options.prefix}\.)?([a-zA-Z0-9]+)@`, 'g')
-    handler = getMatchHandlerWithPrefix(options.prefix, mergedReplacements)
+  if (_options.prefix) {
+    prefix = _options.prefix
+    pattern = new RegExp(`@(${_options.prefix}\.)?([a-zA-Z0-9]+)@`, 'g')
+    handler = getMatchHandlerWithPrefix(_options.prefix, mergedReplacements)
   }
-  if (options.unprefixed) {
+  if (_options.unprefixed) {
     prefix = undefined
     pattern = /@([a-zA-Z0-9]+)@/g
-    handler = getMatchHandler(mergedReplacements, options)
+    handler = getMatchHandler(mergedReplacements, _options)
   }
 
-  if (options.debug) {
+  if (_options.debug) {
     console.log('Prefix:', prefix || 'unprefixed')
     console.log('Replacements:', mergedReplacements)
   }
