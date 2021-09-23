@@ -2,7 +2,7 @@ const replace = require('gulp-replace')
 
 // defaults
 const defaultPrefix = 'package'
-const defaultPattern = /@(package\.)?([^@]+)@/g
+const defaultPattern = /@(package\.)?([a-zA-Z0-9]+)@/g
 const contextCharacters = 20
 
 /**
@@ -178,12 +178,12 @@ function GulpReplaceTmpl (replacements, options) {
   }
   if (options.prefix) {
     prefix = options.prefix
-    pattern = new RegExp(`@(${options.prefix}\.)?([^@]+)@`, 'g')
+    pattern = new RegExp(`@(${options.prefix}\.)?([a-zA-Z0-9]+)@`, 'g')
     handler = getMatchHandlerWithPrefix(options.prefix, mergedReplacements)
   }
   if (options.unprefixed) {
     prefix = undefined
-    pattern = /@([^@]+)@/g
+    pattern = /@([a-zA-Z0-9]+)@/g
     handler = getMatchHandler(mergedReplacements, options)
   }
 
