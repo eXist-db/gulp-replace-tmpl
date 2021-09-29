@@ -2,7 +2,7 @@ const replace = require('gulp-replace')
 
 // defaults
 const defaultPrefix = 'package'
-const defaultPattern = /@(package\.)?([a-zA-Z0-9]+)@/g
+const defaultPattern = /@(package\.)?([a-zA-Z0-9_/-]+)@/g
 const contextCharacters = 20
 
 /**
@@ -164,8 +164,8 @@ function GulpReplaceTmpl (replacements, options) {
   if (!replacements) {
     throw new Error('Replacements missing')
   }
-  if (_options.prefix && _options.prefix.match(/[^a-zA-Z0-9]/)) {
-    throw new Error('Invalid prefix, only [a-zA-Z0-9] allowed')
+  if (_options.prefix && _options.prefix.match(/[^a-zA-Z0-9_/-]/)) {
+    throw new Error('Invalid prefix, only alphanumeric characters _ and - are allowed')
   }
 
   const mergedReplacements = mergeReplacements(replacements)
@@ -179,12 +179,12 @@ function GulpReplaceTmpl (replacements, options) {
   }
   if (_options.prefix) {
     prefix = _options.prefix
-    pattern = new RegExp(`@(${_options.prefix}\.)?([a-zA-Z0-9]+)@`, 'g')
+    pattern = new RegExp(`@(${_options.prefix}\.)?([a-zA-Z0-9_/-]+)@`, 'g')
     handler = getMatchHandlerWithPrefix(_options.prefix, mergedReplacements)
   }
   if (_options.unprefixed) {
     prefix = undefined
-    pattern = /@([a-zA-Z0-9]+)@/g
+    pattern = /@([a-zA-Z0-9_/-]+)@/g
     handler = getMatchHandler(mergedReplacements, _options)
   }
 
