@@ -1,6 +1,6 @@
 {
   "name": "@existdb/gulp-replace-tmpl",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Replace placeholders in files",
   "main": "index.js",
   "scripts": {
