@@ -1,4 +1,4 @@
-const replace = require('gulp-replace')
+const gulpReplace = require('gulp-replace')
 
 // defaults
 const defaultPrefix = 'package'
@@ -158,7 +158,7 @@ function mergeReplacements (replacements) {
  * @param {GulpReplaceTmplOptions} options configure replacement
  * @return {NodeJS.ReadWriteStream} transformation function
  */
-function GulpReplaceTmpl (replacements, options) {
+function replace (replacements, options) {
   const _options = options || {}
   // required option missing
   if (!replacements) {
@@ -193,7 +193,22 @@ function GulpReplaceTmpl (replacements, options) {
     console.log('Replacements:', mergedReplacements)
   }
 
-  return replace(pattern, handler)
+  return gulpReplace(pattern, handler)
 }
 
-module.exports = GulpReplaceTmpl
+/**
+ * Rename function for use with gulp-rename
+ * Removes the extension off of a file's name
+ * Example: a.txt.tmpl will be renamed to a.txt
+ *
+ * @param {{dirname: string, basename: string, extname: string}} path
+ */
+function removeFileExtension (path) {
+  path.extname = ""
+}
+
+module.exports = {
+  replace,
+  removeFileExtension,
+  default: replace
+}
